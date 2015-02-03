@@ -975,7 +975,7 @@ typedef struct InsertStmt
  */
 typedef struct DeleteStmt
 {
-	NodeTag		type;
+	NodeTag		type;			
 	RangeVar   *relation;		/* relation to delete from */
 	List	   *usingClause;	/* optional using clause for more tables */
 	Node	   *whereClause;	/* qualifications */
@@ -985,11 +985,13 @@ typedef struct DeleteStmt
 
 /* ----------------------
  *		Update Statement
+ *      PostgreSQL中每一种语法都会有一个对应的结构体，比如更新语句Update对应的结构体为UpdateStmt:
  * ----------------------
  */
 typedef struct UpdateStmt
 {
-	NodeTag		type;
+	NodeTag		type;			/* type是个枚举值,表示结构体的类型,在UpdateStmt中为T_UpdateStmt PG的很多struct的第一个元素都是NodeTag，这样在函数中传递指针变量时，他可以很
+								简单的把参数设置成：Node */
 	RangeVar   *relation;		/* relation to update */
 	List	   *targetList;		/* the target list (of ResTarget) */
 	Node	   *whereClause;	/* qualifications */
@@ -1170,7 +1172,7 @@ typedef enum ObjectType
  */
 typedef struct CreateSchemaStmt
 {
-	NodeTag		type;
+	NodeTag		type;			
 	char	   *schemaname;		/* the name of the schema to create */
 	char	   *authid;			/* the owner of the created schema */
 	List	   *schemaElts;		/* schema components (list of parsenodes) */
@@ -1468,10 +1470,10 @@ typedef struct VariableShowStmt
 
 typedef struct CreateStmt
 {
-	NodeTag		type;
+	NodeTag		type;			/* type应该为 T_CreateStmt */
 	RangeVar   *relation;		/* relation to create */
-	List	   *tableElts;		/* column definitions (list of ColumnDef) */
-	List	   *inhRelations;	/* relations to inherit from (list of
+	List	   *tableElts;		/* 列表定义的引用column definitions (list of ColumnDef) */
+	List	   *inhRelations;	/* 由于PG的表是可以继承的relations to inherit from (list of
 								 * inhRelation) */
 	TypeName   *ofTypename;		/* OF typename */
 	List	   *constraints;	/* constraints (list of Constraint nodes) */

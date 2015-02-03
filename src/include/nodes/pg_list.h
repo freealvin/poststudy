@@ -10,18 +10,18 @@
  * structures:
  *
  *		1. A set of "list cells": each cell contains a data field and
- *		   a link to the next cell in the list or NULL.
+ *		   a link to the next cell in the list or NULL.每个Cell有一个数据域和一个指向下一个Cell的指针域
  *		2. A single structure containing metadata about the list: the
  *		   type of the list, pointers to the head and tail cells, and
  *		   the length of the list.
  *
- * We support three types of lists:
+ * We support three types of lists:支持三种类型的list
  *
- *	T_List: lists of pointers
+ *	T_List: lists of pointers 指针类型的链表
  *		(in practice usually pointers to Nodes, but not always;
  *		declared as "void *" to minimize casting annoyances)
- *	T_IntList: lists of integers
- *	T_OidList: lists of Oids
+ *	T_IntList: lists of integers 整数类型的链表
+ *	T_OidList: lists of Oids     在内部使用对象标识符（OID）作为各种系统表的主键
  *
  * (At the moment, ints and Oids are the same size, but they may not
  * always be so; try to be careful to maintain the distinction.)
@@ -82,7 +82,7 @@ extern int	list_length(const List *l);
 #endif   /* PG_USE_INLINE */
 #if defined(PG_USE_INLINE) || defined(PG_LIST_INCLUDE_DEFINITIONS)
 STATIC_IF_INLINE ListCell *
-list_head(const List *l)
+list_head(const List *l) //取List第一个元素
 {
 	return l ? l->head : NULL;
 }

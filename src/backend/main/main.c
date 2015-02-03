@@ -62,6 +62,7 @@ main(int argc, char *argv[])
 
 	/*
 	 * Platform-specific startup hacks
+	 启动指定程序
 	 */
 	startup_hacks(progname);
 
